@@ -1,0 +1,22 @@
+{
+  "name": "car-seller",
+  "version": "1.0.0",
+  "description": "Full stack nodejs application for selling and buying cars",
+  "main": "index.js",
+  "scripts": {
+    "docker-dev": "cd packages/ && docker-compose down && docker-compose up -d --build",
+    "docker-dev-down": "cd packages/ && docker-compose down --remove-orphans",
+    "lint": "cd packages/api && npm run lint",
+    "build": "cd packages/api && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitriynoway/car-seller.git"
+  },
+  "author": "Dmitriy Babenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimitriynoway/car-seller/issues"
+  },
+  "homepage": "https://github.com/dimitriynoway/car-seller#readme"
+}

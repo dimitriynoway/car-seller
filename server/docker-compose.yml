@@ -1,0 +1,38 @@
+version: '3.5'
+
+services:
+  api-db:
+    build: api-db/
+    container_name: car-seller-dev-db
+    networks:
+      - car-seller-dev
+    restart: always
+    ports:
+      - 5450:5432
+    volumes:
+      - api-db:/data/db
+    environment:
+      - POSTGRES_USER=car-seller
+      - POSTGRES_PASSWORD=car-seller
+  api-test-db:
+    build: api-db/
+    container_name: car-seller-test-db
+    networks:
+      - car-seller-test
+    restart: always
+    ports:
+      - 5451:5432
+    volumes:
+      - api-test-db:/data/db
+    environment:
+      - POSTGRES_USER=car-seller
+      - POSTGRES_PASSWORD=car-seller
+volumes:
+  api-db:
+    name: car-seller-dev-db
+  api-test-db:
+    name: car-seller-test-db
+
+networks:
+  car-seller-dev:
+  car-seller-test:
