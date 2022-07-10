@@ -1,7 +1,4 @@
 {
-  "ts-node": {
-    "files": true
-  },
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -9,25 +6,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "target": "es2021",
-    "lib": ["es2021"],
+    "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
-    // "paths": {
-    //   "@common/*": ["common/*"],
-    //   "@config/*": ["config/*"],
-    //   "@database/*": ["database/*"],
-    //   "@models/*": ["models/*"],
-    //   "@modules/*": ["modules/*"],
-    //   "@repositories/*": ["repositories/*"],
-    //   "@utils/*": ["utils/*"],
-    //   "@workers/*": ["workers/*"]
-    // },
+    "baseUrl": "./",
     "incremental": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "preserveSymlinks": true
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
   }
 }
