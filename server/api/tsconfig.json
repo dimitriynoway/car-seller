@@ -14,17 +14,19 @@
     "lib": ["es2021"],
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
-    // "paths": {
-    //   "@common/*": ["common/*"],
-    //   "@config/*": ["config/*"],
-    //   "@database/*": ["database/*"],
-    //   "@models/*": ["models/*"],
-    //   "@modules/*": ["modules/*"],
-    //   "@repositories/*": ["repositories/*"],
-    //   "@utils/*": ["utils/*"],
-    //   "@workers/*": ["workers/*"]
-    // },
+    "baseUrl": "./",
+    "paths": {
+      "@src": ["src/*"],
+      "@lib": ["lib/*"]
+      // "@common/*": ["common/*"],
+      // "@config/*": ["config/*"],
+      // "@database/*": ["database/*"],
+      // "@models/*": ["models/*"],
+      // "@modules/*": ["modules/*"],
+      // "@repositories/*": ["repositories/*"],
+      // "@utils/*": ["utils/*"],
+      // "@workers/*": ["workers/*"]
+    },
     "incremental": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
