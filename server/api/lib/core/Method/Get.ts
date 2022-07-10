@@ -1,5 +1,7 @@
-export const Get = (path: string): MethodDecorator => (target, propertyKey: string, descriptor) => {
-    console.log({ target, propertyKey, descriptor, constr: target.constructor });
+export const Get =
+  (path: string): MethodDecorator =>
+  (target, propertyKey: string) => {
+    const updatedPath = path === "/" ? "" : path;
 
     if (!Reflect.hasMetadata("routes", target.constructor)) {
       Reflect.defineMetadata("routes", [], target.constructor);
@@ -9,7 +11,7 @@ export const Get = (path: string): MethodDecorator => (target, propertyKey: stri
 
     routes.push({
       method: "GET",
-      path,
+      path: updatedPath,
       methodName: propertyKey,
     });
 

@@ -1,19 +1,17 @@
-export const Module = ({ controller = [] }: { controller: any[] }) => {
-  console.log({ controller });
-
+export const Module = ({ controllers = [] }: { controllers: any[] }) => {
   const routesObj = [];
 
-  controller.forEach((Controller) => {
+  controllers.forEach((Controller) => {
     // implement IoC here
     const instance = new Controller();
 
-    const prefix = Reflect.getMetadata("prefix", controller);
-    const routes: Array<any> = Reflect.getMetadata("routes", controller);
-
-    console.log({ prefix, routes });
+    const prefix = Reflect.getMetadata("prefix", Controller);
+    const routes: Array<any> = Reflect.getMetadata("routes", Controller);
 
     const obj = routes.map((route) => {
+      console.log({ route });
       const { path, method, methodName } = route;
+      console.log({ path, method, methodName });
       return { route: prefix + path, method, handler: instance[methodName] };
     });
 

@@ -6,6 +6,8 @@
 export const Controller = (prefix = "/"): ClassDecorator => {
   const modifiedPrefix = prefix === "" ? "/" : !prefix.startsWith("/") ? `/${prefix}` : prefix;
 
+  console.log("DEFINE CONTROLLER");
+
   return (target: any) => {
     // define prefix metadata value to class
     Reflect.defineMetadata("prefix", modifiedPrefix, target);

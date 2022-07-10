@@ -1,20 +1,11 @@
 import "reflect-metadata";
-import { Controller, Get, server, Module } from "../lib/core";
+import { CreateServer } from "../lib/core";
+import { rootModule } from "./modules";
 
-@Controller()
-class X {
-  // eslint-disable-next-line class-methods-use-this
-  @Get("start")
-  method() {
-    return "hello";
-  }
-}
+const main = () => {
+  const server = CreateServer(rootModule);
 
-const x = new X();
-x.method();
+  server.listen(3000);
+};
 
-const m = Module({ controller: [X] });
-
-console.log({ m });
-
-server(m).listen(3000);
+main();
