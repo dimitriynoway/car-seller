@@ -18,5 +18,18 @@
   "bugs": {
     "url": "https://github.com/dimitriynoway/car-seller/issues"
   },
-  "homepage": "https://github.com/dimitriynoway/car-seller#readme"
+  "homepage": "https://github.com/dimitriynoway/car-seller#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-plugin": "^4.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.7.4"
+  }
 }
