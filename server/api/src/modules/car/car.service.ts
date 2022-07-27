@@ -1,9 +1,17 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable class-methods-use-this */
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions , Repository } from 'typeorm';
+import {
+  Between,
+  FindManyOptions,
+  LessThanOrEqual,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
 import { ICarService } from './car.interface';
 import { Car } from '../../models/car.model';
 import { CreateCarDTO } from './dto/createCar.dto';
+import { Buyer } from '../../models/buyer.model';
 
 @Injectable()
 export class CarService implements ICarService {
@@ -16,17 +24,23 @@ export class CarService implements ICarService {
     return this.carRepository.find();
   }
 
-  getCar(id: number): Promise<Car> {
-    return this.carRepository.findOne(id);
+  async getCar(id: number): Promise<Car | null> {
+    const car = await this.carRepository.findOne(id);
+
+    return car ?? null;
   }
 
-  async updateCar(id: string, payload: Partial<Car>): Promise<boolean> {
-    const updatedCar = await this.carRepository.update(id, payload);
+  async updateCar(id: number, payload: Partial<Car>): Promise<boolean> {
+    try {
+      const updatedCar = await this.carRepository.update(id, payload);
 
-    return updatedCar.affected === 1;
+      return updatedCar.affected === 1;
+    } catch (e) {
+      throw new BadRequestException(`Incorrect data passed: ${e}`);
+    }
   }
 
-  async removeCar(id: string): Promise<boolean> {
+  async removeCar(id: number): Promise<boolean> {
     const removedCar = await this.carRepository.delete(id);
 
     return removedCar.affected === 1;
@@ -62,5 +76,38 @@ export class CarService implements ICarService {
     });
 
     return { where: filteredQuery };
+  }
+
+  filterForBuyer(payload: Partial<Buyer>): Promise<Car[]> {
+    const { lowestPrice, highestPrice } = payload;
+    const filteredQuery = {};
+    const carProps = [
+      'id',
+      'firm',
+      'mark',
+      'year',
+      'power',
+      'transmission',
+      'technicalStatus',
+    ];
+
+    Object.keys(payload).forEach((prop) => {
+      if (carProps.includes(prop)) {
+        filteredQuery[prop] = payload[prop];
+      }
+    });
+
+    const price =
+      lowestPrice && highestPrice
+        ? { price: Between(lowestPrice, highestPrice) }
+        : lowestPrice
+        ? { price: MoreThanOrEqual(lowestPrice) }
+        : highestPrice
+        ? { price: LessThanOrEqual(lowestPrice) }
+        : {};
+
+    const query = { where: { ...filteredQuery, ...price } };
+
+    return this.carRepository.find(query);
   }
 }

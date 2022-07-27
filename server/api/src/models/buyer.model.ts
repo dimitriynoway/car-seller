@@ -18,7 +18,7 @@ export class Buyer {
   year: number;
 
   @Column()
-  power: string;
+  power: number;
 
   @Column()
   transmission: string;

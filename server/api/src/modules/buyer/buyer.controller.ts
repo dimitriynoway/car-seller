@@ -1,29 +1,58 @@
-import { Controller, Delete, Get, Inject, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { Buyer } from '../../models/buyer.model';
 import { IBuyerService } from './buyer.interface';
 import { BUYER_SERVICE } from './buyer.key';
+import { CreateBuyerDto } from './dto/createBuyer.dto';
 
-@Controller('/car')
+@Controller('/buyer')
 export class BuyerController {
   constructor(
     @Inject(BUYER_SERVICE)
     private buyerService: IBuyerService,
   ) {}
 
+  @Get('/:id/cars')
+  getCarsForBuyer(@Param('id') id: number) {
+    return this.buyerService.getCarsForBuyer(id);
+  }
+
   @Get('/')
-  getBuyers() {}
+  getBuyers() {
+    return this.buyerService.getBuyersOrders();
+  }
 
   @Get('search')
-  search() {}
+  search() {
+    return this.buyerService.search();
+  }
 
-  @Post(':id')
-  createBuyer() {}
+  @Post('/')
+  createBuyer(@Body() payload: CreateBuyerDto) {
+    return this.buyerService.createBuyerOrder(payload);
+  }
 
   @Put(':id')
-  updateBuyer() {}
+  updateBuyer(@Param('id') id: number, @Body() payload: Partial<Buyer>) {
+    return this.buyerService.updateBuyerOrder(id, payload);
+  }
 
   @Delete(':id')
-  removeBuyer() {}
+  removeBuyer(@Param('id') id: number) {
+    return this.buyerService.removeBuyerOrder(id);
+  }
 
   @Get(':id')
-  getBuyer() {}
+  getBuyer(@Param('id') id: number) {
+    return this.buyerService.getBuyerOrder(id);
+  }
 }

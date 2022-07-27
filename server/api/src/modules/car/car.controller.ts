@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Inject,
+  Param,
   Post,
   Put,
   Query,
@@ -11,7 +12,7 @@ import {
 import { Car } from '../../models/car.model';
 import { ICarService } from './car.interface';
 import { CAR_SERVICE } from './car.key';
-import { CreateCarDTO } from './dto/createCar.dto';
+import { CreateCarDTO, UpdateCarDTO } from './dto/createCar.dto';
 
 @Controller('/car')
 export class CarController {
@@ -36,17 +37,17 @@ export class CarController {
   }
 
   @Put(':id')
-  updateCar() {
-    // return this.carService.updateCar();
+  updateCar(@Param('id') id: number, @Body() updateCar: UpdateCarDTO) {
+    return this.carService.updateCar(id, updateCar);
   }
 
   @Delete(':id')
-  removeCar() {
-    // return this.carService.removeCar();
+  removeCar(@Param('id') id: number) {
+    return this.carService.removeCar(id);
   }
 
   @Get(':id')
-  getCar(@Query('id') id: number) {
+  getCar(@Param('id') id: number) {
     return this.carService.getCar(id);
   }
 }

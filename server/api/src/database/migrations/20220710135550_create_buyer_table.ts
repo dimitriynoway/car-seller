@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
       table.integer('year').notNullable();
       table.integer('power').notNullable();
       table.string('transmission').notNullable();
-      table.string('technicalStatusark').notNullable();
+      table.string('technicalStatus').notNullable();
       table.integer('lowestPrice').notNullable();
       table.integer('highestPrice').notNullable();
       table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
