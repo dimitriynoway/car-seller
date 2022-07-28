@@ -74,5 +74,5 @@ export class UpdateCarDTO {
 // "power": 245,
 // "transmission": "full",
 // "technicalStatus": "used",
-// "lowestPrice": 20000
+// "lowestPrice": 20000,
 // "highestPrice": 30000

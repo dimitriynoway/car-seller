@@ -78,11 +78,10 @@ export class CarService implements ICarService {
     return { where: filteredQuery };
   }
 
-  filterForBuyer(payload: Partial<Buyer>): Promise<Car[]> {
+  async filterForBuyer(payload: Partial<Buyer>): Promise<Car[]> {
     const { lowestPrice, highestPrice } = payload;
     const filteredQuery = {};
     const carProps = [
-      'id',
       'firm',
       'mark',
       'year',
