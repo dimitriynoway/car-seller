@@ -1,0 +1,41 @@
+{
+  "name": "car-seller",
+  "version": "1.0.0",
+  "description": "Full stack nodejs application for selling and buying cars",
+  "main": "index.js",
+  "scripts": {
+    "docker-dev": "cd server/ && docker-compose down && docker-compose up -d --build",
+    "docker-dev-down": "cd server/ && docker-compose down --remove-orphans",
+    "lint": "cd server/api && npm run lint",
+    "build": "cd server/api && npm run build",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitriynoway/car-seller.git"
+  },
+  "author": "Dmitriy Babenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimitriynoway/car-seller/issues"
+  },
+  "homepage": "https://github.com/dimitriynoway/car-seller#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-plugin": "^4.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.1",
+    "@nestjs/core": "^9.0.1"
+  }
+}
