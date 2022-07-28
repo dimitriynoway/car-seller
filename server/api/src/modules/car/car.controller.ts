@@ -21,6 +21,11 @@ export class CarController {
     private carService: ICarService,
   ) {}
 
+  @Get('/:id/buyer')
+  getCarsForBuyer(@Param('id') id: number) {
+    return this.carService.getBuyersForCar(id);
+  }
+
   @Get('/')
   getCars() {
     return this.carService.getCars();

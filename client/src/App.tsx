@@ -9,6 +9,7 @@ import { Home } from "./components/Home";
 import { CreateCarField } from "./components/CreateCarField";
 import { AllCars } from "./components/AllCars";
 import { CarFor } from "./components/CarFor";
+import { OrderFor } from "./components/OrderFor";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           }
         />
         <Route path="/order/:orderId" element={<CarFor />} />
+        <Route path="/car/:carId" element={<OrderFor />} />
       </Routes>
     </BrowserRouter>
   );

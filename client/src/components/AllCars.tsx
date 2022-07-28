@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FindOrderForCar } from "./FindOrderForCar";
 
 export interface Car {
   year: number;
@@ -59,6 +60,7 @@ export const AllCars = () => {
                     <Typography>Technical Status: {car.technicalStatus}</Typography>
                     <Typography>Transmission: {car.transmission}</Typography>
                     <Typography>Price: {car.price}</Typography>
+                    <FindOrderForCar carId={car.id} />
                   </Box>
                 );
               })

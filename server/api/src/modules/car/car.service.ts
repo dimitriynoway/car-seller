@@ -18,7 +18,23 @@ export class CarService implements ICarService {
   constructor(
     @InjectRepository(Car)
     private carRepository: Repository<Car>,
+    @InjectRepository(Buyer)
+    private buyerRepository: Repository<Buyer>,
   ) {}
+
+  async getBuyersForCar(id: number): Promise<Buyer[]> {
+    try {
+      const carReq = await this.carRepository.findOne(id);
+
+      if (!carReq) {
+        throw new BadRequestException('Does not exist');
+      }
+
+      return this.filterCars(carReq);
+    } catch (e) {
+      throw new BadRequestException(`getCarsForBuyer. error: ${e}`);
+    }
+  }
 
   getCars(): Promise<Car[]> {
     return this.carRepository.find();
@@ -76,6 +92,35 @@ export class CarService implements ICarService {
     });
 
     return { where: filteredQuery };
+  }
+
+  private filterCars(payload: Car) {
+    const { price } = payload;
+    const filteredQuery = {};
+    const carProps = [
+      'firm',
+      'mark',
+      'year',
+      'power',
+      'transmission',
+      'technicalStatus',
+    ];
+
+    Object.keys(payload).forEach((prop) => {
+      if (carProps.includes(prop)) {
+        filteredQuery[prop] = payload[prop];
+      }
+    });
+
+    const query = {
+      where: {
+        ...filteredQuery,
+        lowestPrice: LessThanOrEqual(price),
+        highestPrice: MoreThanOrEqual(price),
+      },
+    };
+
+    return this.buyerRepository.find(query);
   }
 
   async filterForBuyer(payload: Partial<Buyer>): Promise<Car[]> {
