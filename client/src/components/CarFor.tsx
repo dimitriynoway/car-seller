@@ -23,6 +23,8 @@ export const CarFor = (props: any) => {
   const getCarsForOrder = async () => {
     const { data } = await axios.get(`${endpoint}/buyer/${params.orderId}/cars`);
 
+    console.log({ data });
+
     if (data) {
       setCars(data);
     }

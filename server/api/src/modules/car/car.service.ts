@@ -152,6 +152,11 @@ export class CarService implements ICarService {
 
     const query = { where: { ...filteredQuery, ...price } };
 
-    return this.carRepository.find(query);
+    const allCars = await this.carRepository.find();
+    console.log({ query, allCars });
+
+    const res = await this.carRepository.find(query);
+    console.log({ res });
+    return res;
   }
 }
